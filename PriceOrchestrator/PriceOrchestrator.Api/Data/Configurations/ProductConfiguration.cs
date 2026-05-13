@@ -38,6 +38,11 @@ namespace PriceOrchestrator.Api.Data.Configurations
 
             builder.Property(x => x.CreatedAtUtc)
                 .IsRequired();
+
+            builder.Property(x => x.UpdatedAtUtc)
+                .IsRequired(false);
+
+
         }
     }
 }
