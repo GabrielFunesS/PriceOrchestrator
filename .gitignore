@@ -58,3 +58,4 @@ nunit-*.xml
 /.vs
 /PriceOrchestrator/.vs/PriceOrchestrator.slnx
 *.user
+/PriceOrchestrator/.vs/ProjectEvaluation
