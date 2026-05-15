@@ -15,7 +15,7 @@ namespace PriceOrchestrator.Api.Entities
         public string RequestedBy { get; set; } = default!;
         public string RequestSource { get; set; } = default!;
 
-        public string RejectionReason { get; set; } = default!;
+        public string? RejectionReason { get; set; } = default!;
 
 
         public Product Product { get; set; } = default!;

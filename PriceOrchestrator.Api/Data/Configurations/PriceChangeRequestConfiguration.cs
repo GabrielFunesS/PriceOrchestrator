@@ -48,7 +48,8 @@ namespace PriceOrchestrator.Api.Data.Configurations
                 .HasMaxLength(50);
 
             builder.Property(x => x.RejectionReason)
-                .HasMaxLength(500);
+                .HasMaxLength(500)
+                .IsRequired(false);
 
             builder.Property(x => x.CreatedAtUtc)
                 .IsRequired();
