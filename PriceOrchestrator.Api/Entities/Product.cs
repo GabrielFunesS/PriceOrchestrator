@@ -13,7 +13,8 @@
         public string? Category { get; set; }
 
         public ProductCurrentPrice CurrentPrice { get; set; } = default!;
-
         public ICollection<PriceChangeRequest> PriceChangeRequests { get; set; } = [];
+        public ICollection<Promotion> Promotions { get; set; } = [];
+        public ICollection<ProductStock> Stocks { get; set; } = [];
     }
 }
