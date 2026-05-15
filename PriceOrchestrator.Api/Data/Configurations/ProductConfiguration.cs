@@ -9,12 +9,14 @@ namespace PriceOrchestrator.Api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.ToTable("products");
+            builder.ToTable(nameof(Product));
 
             builder.HasKey(x => x.Id);
 
             builder.HasIndex(x => x.ExternalId)
                 .IsUnique();
+
+            builder.HasIndex(x => new { x.Category, x.Brand });
 
             builder.Property(x => x.ExternalId)
                 .HasMaxLength(100)
@@ -41,7 +43,6 @@ namespace PriceOrchestrator.Api.Data.Configurations
 
             builder.Property(x => x.UpdatedAtUtc)
                 .IsRequired(false);
-
 
         }
     }

@@ -9,7 +9,7 @@ namespace PriceOrchestrator.Api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<ProductCurrentPrice> builder)
         {
-            builder.ToTable("product_current_prices");
+            builder.ToTable(nameof(ProductCurrentPrice));
 
             builder.HasKey(x => x.Id);
 

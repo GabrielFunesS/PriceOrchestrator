@@ -22,6 +22,69 @@ namespace PriceOrchestrator.Api.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("PriceOrchestrator.Api.Entities.PriceChangeRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("AppliedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)");
+
+                    b.Property<DateTime>("EffectiveFromUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("NewPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<decimal>("OldPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("RejectionReason")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("RequestSource")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("RequestedBy")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("Status", "EffectiveFromUtc");
+
+                    b.ToTable("PriceChangeRequest", (string)null);
+                });
+
             modelBuilder.Entity("PriceOrchestrator.Api.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -61,7 +124,9 @@ namespace PriceOrchestrator.Api.Data.Migrations
                     b.HasIndex("ExternalId")
                         .IsUnique();
 
-                    b.ToTable("products", (string)null);
+                    b.HasIndex("Category", "Brand");
+
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("PriceOrchestrator.Api.Entities.ProductCurrentPrice", b =>
@@ -99,7 +164,18 @@ namespace PriceOrchestrator.Api.Data.Migrations
                     b.HasIndex("ProductId")
                         .IsUnique();
 
-                    b.ToTable("product_current_prices", (string)null);
+                    b.ToTable("ProductCurrentPrice", (string)null);
+                });
+
+            modelBuilder.Entity("PriceOrchestrator.Api.Entities.PriceChangeRequest", b =>
+                {
+                    b.HasOne("PriceOrchestrator.Api.Entities.Product", "Product")
+                        .WithMany("PriceChangeRequests")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("PriceOrchestrator.Api.Entities.ProductCurrentPrice", b =>
@@ -117,6 +193,8 @@ namespace PriceOrchestrator.Api.Data.Migrations
                 {
                     b.Navigation("CurrentPrice")
                         .IsRequired();
+
+                    b.Navigation("PriceChangeRequests");
                 });
 #pragma warning restore 612, 618
         }

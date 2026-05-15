@@ -14,5 +14,6 @@
 
         public ProductCurrentPrice CurrentPrice { get; set; } = default!;
 
+        public ICollection<PriceChangeRequest> PriceChangeRequests { get; set; } = [];
     }
 }
