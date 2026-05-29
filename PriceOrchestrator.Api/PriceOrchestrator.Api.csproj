@@ -22,7 +22,6 @@
     <Folder Include="Configurations\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="Middleware\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
