@@ -19,5 +19,6 @@ namespace PriceOrchestrator.Api.Entities
 
 
         public Product Product { get; set; } = default!;
+        public ProductCurrentPrice CurrentPrice { get; set; } = default!;
     }
 }

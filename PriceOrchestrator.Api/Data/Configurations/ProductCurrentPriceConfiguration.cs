@@ -28,7 +28,7 @@ namespace PriceOrchestrator.Api.Data.Configurations
                 .IsRequired();
 
             builder.Property(x => x.LastPriceChangeRequestId)
-                .IsRequired(false);
+                .IsRequired();
 
             builder.Property(x => x.EffectiveFromUtc)
                 .IsRequired();
@@ -42,6 +42,11 @@ namespace PriceOrchestrator.Api.Data.Configurations
             builder.HasOne(x => x.Product)
                 .WithOne(x => x.CurrentPrice)
                 .HasForeignKey<ProductCurrentPrice>(x => x.ProductId);
+
+            builder.HasOne(x => x.PriceChange)
+                .WithOne(x => x.CurrentPrice)
+                .HasForeignKey<ProductCurrentPrice>(x => x.LastPriceChangeRequestId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

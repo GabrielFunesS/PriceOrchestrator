@@ -29,14 +29,18 @@ namespace PriceOrchestrator.Api.Data.Configurations
             builder.Property(x => x.Description)
                 .HasMaxLength(2000);
 
-
             builder.Property(x => x.Brand)
                 .HasMaxLength(200);
-
 
             builder.Property(x => x.Category)
                 .HasMaxLength(200);
 
+            builder.Property(x => x.IsActive)
+                .HasDefaultValue(false)
+                .IsRequired();
+
+            builder.Property(x => x.InvalidationReason)
+                .HasMaxLength(500);
 
             builder.Property(x => x.CreatedAtUtc)
                 .IsRequired();
