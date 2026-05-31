@@ -18,7 +18,7 @@ namespace PriceOrchestrator.Api.Entities
         public string? RejectionReason { get; set; } = default!;
 
 
-        public Product Product { get; set; } = default!;
-        public ProductCurrentPrice CurrentPrice { get; set; } = default!;
+        public Product? Product { get; set; }
+        public ProductCurrentPrice? CurrentPrice { get; set; }
     }
 }

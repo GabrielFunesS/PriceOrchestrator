@@ -13,6 +13,6 @@
         public DateTime? LastMovementAtUtc { get; set; }
 
         // Navegación
-        public Product Product { get; set; } = default!;
+        public Product? Product { get; set; }
     }
 }

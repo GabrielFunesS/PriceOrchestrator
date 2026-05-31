@@ -16,9 +16,9 @@
 
         public string? InvalidationReason { get; set; }
 
-        public ProductCurrentPrice? CurrentPrice { get; set; } = default!;
-        public ICollection<PriceChangeRequest> PriceChangeRequests { get; set; } = new List<PriceChangeRequest>();
-        public ICollection<Promotion> Promotions { get; set; } = new List<Promotion>();
-        public ICollection<ProductStock> Stocks { get; set; } = new List<ProductStock>();
+        public ProductCurrentPrice? CurrentPrice { get; set; }
+        public ICollection<PriceChangeRequest>? PriceChangeRequests { get; set; }
+        public ICollection<Promotion>? Promotions { get; set; }
+        public ICollection<ProductStock>? Stocks { get; set; }
     }
 }

@@ -15,7 +15,7 @@
 
 
         // Navigation Properties
-        public Product Product { get; set; } = default!;
-        public PriceChangeRequest PriceChange { get; set; } = default!;
+        public Product? Product { get; set; }
+        public PriceChangeRequest? PriceChange { get; set; }
     }
 }
