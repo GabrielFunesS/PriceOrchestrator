@@ -11,10 +11,11 @@
 
         public DateTime EffectiveFromUtc { get; set; }
 
-        public Guid? LastPriceChangeRequestId { get; set; }
+        public Guid LastPriceChangeRequestId { get; set; }
 
 
         // Navigation Properties
-        public Product Product { get; set; } = default!;
+        public Product? Product { get; set; }
+        public PriceChangeRequest? PriceChange { get; set; }
     }
 }

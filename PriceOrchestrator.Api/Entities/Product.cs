@@ -12,9 +12,13 @@
 
         public string? Category { get; set; }
 
-        public ProductCurrentPrice CurrentPrice { get; set; } = default!;
-        public ICollection<PriceChangeRequest> PriceChangeRequests { get; set; } = [];
-        public ICollection<Promotion> Promotions { get; set; } = [];
-        public ICollection<ProductStock> Stocks { get; set; } = [];
+        public bool IsActive { get; set; }
+
+        public string? InvalidationReason { get; set; }
+
+        public ProductCurrentPrice? CurrentPrice { get; set; }
+        public ICollection<PriceChangeRequest>? PriceChangeRequests { get; set; }
+        public ICollection<Promotion>? Promotions { get; set; }
+        public ICollection<ProductStock>? Stocks { get; set; }
     }
 }

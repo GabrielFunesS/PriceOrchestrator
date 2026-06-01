@@ -1,18 +1,12 @@
-﻿namespace PriceOrchestrator.Api.Entities
+﻿namespace PriceOrchestrator.Api.DTOs
 {
-    public class ProductStock : BaseEntity
+    public class ProductStockDto
     {
         public Guid ProductId { get; set; }
-
         public decimal Quantity { get; set; }
 
         public decimal ReservedQuantity { get; set; }
 
         public string Warehouse { get; set; } = default!;
-
-        public DateTime? LastMovementAtUtc { get; set; }
-
-        // Navegación
-        public Product? Product { get; set; }
     }
 }
