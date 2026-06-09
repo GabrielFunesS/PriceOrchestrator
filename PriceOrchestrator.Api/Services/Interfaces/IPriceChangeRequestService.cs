@@ -6,5 +6,6 @@ namespace PriceOrchestrator.Api.Services.Interfaces
     {
         Task<Guid> CreateRequestAsync(CreatePriceChangeDto dto);
         Task<bool> CancelRequestAsync(Guid requestId);
+        Task ProcessPendingAsync(CancellationToken cancellationToken = default);
     }
 }
