@@ -37,9 +37,7 @@ namespace PriceOrchestrator.Api.Data.Configurations
             builder.Property(x => x.AppliedAtUtc)
                 .IsRequired(false);
 
-            builder.Property(x => x.Status)
-                .HasConversion<string>()
-                .HasMaxLength(20);
+            builder.Property(x => x.Status);
 
             builder.Property(x => x.RequestedBy)
                 .HasMaxLength(100);

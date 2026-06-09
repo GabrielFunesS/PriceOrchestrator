@@ -1,4 +1,7 @@
 <Solution>
   <Project Path="PriceOrchestrator.Api/PriceOrchestrator.Api.csproj" />
-  <Project Path="PriceOrchestrator.Tests/PriceOrchestrator.Tests.csproj" />
+  <Project Path="PriceOrchestrator.Tests/PriceOrchestrator.Tests.csproj">
+    <Build Solution="Debug|*" Project="false" />
+  </Project>
+  <Project Path="PriceOrchestrator.Worker/PriceOrchestrator.Worker.csproj" />
 </Solution>
