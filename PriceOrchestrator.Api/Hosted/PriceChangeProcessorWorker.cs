@@ -31,16 +31,18 @@ namespace PriceOrchestrator.Api.Hosted
                 try
                 {
                     using var scope = _scopeFactory.CreateScope();
-                    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                    // Use the domain service to process pending requests (reuses existing business logic)
+                    var processor = scope.ServiceProvider.GetRequiredService<Services.Interfaces.IPriceChangeRequestService>();
 
-                    // Example work: log number of pending price change requests.
+                    await processor.ProcessPendingAsync(stoppingToken);
+
+                    // Log remaining pending count for observability
+                    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                     var pendingCount = await db.PriceChangeRequests
                         .Where(r => r.Status == PriceChangeRequestStatus.Pending)
                         .CountAsync(stoppingToken);
 
-                    _logger.LogInformation("Pending price change requests: {Count}", pendingCount);
-
-                    // TODO: implement actual processing logic (apply prices, notify, etc.)
+                    _logger.LogInformation("Processed pending price change requests. Remaining pending: {Count}", pendingCount);
                 }
                 catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
                 {
