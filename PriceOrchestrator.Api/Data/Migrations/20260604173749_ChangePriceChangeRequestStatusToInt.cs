@@ -39,8 +39,8 @@ namespace PriceOrchestrator.Api.Data.Migrations
             // Convert existing textual status values to their integer equivalents
             // then alter the column type to integer using a cast.
             migrationBuilder.Sql(@"
-UPDATE \"PriceChangeRequest\"
-SET \"Status\" = CASE \"Status\"
+UPDATE ""PriceChangeRequest""
+SET ""Status"" = CASE ""Status""
   WHEN 'Pending' THEN '1'
   WHEN 'Applied' THEN '2'
   WHEN 'Expired' THEN '3'
@@ -48,7 +48,7 @@ SET \"Status\" = CASE \"Status\"
   ELSE '1' END;
 ");
 
-            migrationBuilder.Sql(@"ALTER TABLE \"PriceChangeRequest\" ALTER COLUMN \"Status\" TYPE integer USING (\"Status\"::integer);");
+            migrationBuilder.Sql(@"ALTER TABLE ""PriceChangeRequest"" ALTER COLUMN ""Status"" TYPE integer USING (""Status""::integer);");
 
             migrationBuilder.AlterColumn<string>(
                 name: "RejectionReason",
@@ -63,7 +63,7 @@ SET \"Status\" = CASE \"Status\"
             // Create a unique index only for non-null LastPriceChangeRequestId values to
             // avoid conflicts when multiple rows have NULL. Use raw SQL for a partial index
             // since EF Core CreateIndex may not emit the WHERE clause for all providers.
-            migrationBuilder.Sql(@"CREATE UNIQUE INDEX IF NOT EXISTS \"IX_ProductCurrentPrice_LastPriceChangeRequestId\" ON \"ProductCurrentPrice\"(\"LastPriceChangeRequestId\") WHERE \"LastPriceChangeRequestId\" IS NOT NULL;");
+            migrationBuilder.Sql(@"CREATE UNIQUE INDEX IF NOT EXISTS ""IX_ProductCurrentPrice_LastPriceChangeRequestId"" ON ""ProductCurrentPrice""(""LastPriceChangeRequestId"") WHERE ""LastPriceChangeRequestId"" IS NOT NULL;");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ProductCurrentPrice_PriceChangeRequest_LastPriceChangeRequestId",
@@ -83,7 +83,7 @@ SET \"Status\" = CASE \"Status\"
                 table: "ProductCurrentPrice");
 
             // Drop the partial unique index created via raw SQL in Up
-            migrationBuilder.Sql(@"DROP INDEX IF EXISTS \"IX_ProductCurrentPrice_LastPriceChangeRequestId\";");
+            migrationBuilder.Sql(@"DROP INDEX IF EXISTS ""IX_ProductCurrentPrice_LastPriceChangeRequestId"";");
 
             migrationBuilder.DropColumn(
                 name: "InvalidationReason",
@@ -112,8 +112,8 @@ SET \"Status\" = CASE \"Status\"
 
             // Convert numeric status values back to their string representations
             migrationBuilder.Sql(@"
-UPDATE \"PriceChangeRequest\"
-SET \"Status\" = CASE \"Status\"
+UPDATE ""PriceChangeRequest""
+SET ""Status"" = CASE ""Status""
   WHEN '1' THEN 'Pending'
   WHEN '2' THEN 'Applied'
   WHEN '3' THEN 'Expired'
@@ -121,7 +121,7 @@ SET \"Status\" = CASE \"Status\"
   ELSE 'Pending' END;
 ");
 
-            migrationBuilder.Sql(@"ALTER TABLE \"PriceChangeRequest\" ALTER COLUMN \"Status\" TYPE character varying(20) USING (\"Status\"::text);");
+            migrationBuilder.Sql(@"ALTER TABLE ""PriceChangeRequest"" ALTER COLUMN ""Status"" TYPE character varying(20) USING (""Status""::text);");
 
             migrationBuilder.AlterColumn<string>(
                 name: "RejectionReason",
