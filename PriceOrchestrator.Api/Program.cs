@@ -22,6 +22,9 @@ namespace PriceOrchestrator.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Register hosted worker
+            builder.Services.AddHostedService<PriceOrchestrator.Api.Hosted.PriceChangeProcessorWorker>();
+
             builder.Services.AddDatabase(builder.Configuration);
 
             var app = builder.Build();
