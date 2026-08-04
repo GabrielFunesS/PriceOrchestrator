@@ -28,7 +28,7 @@ namespace PriceOrchestrator.Api.Data.Configurations
                 .IsRequired();
 
             builder.Property(x => x.LastPriceChangeRequestId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(x => x.EffectiveFromUtc)
                 .IsRequired();

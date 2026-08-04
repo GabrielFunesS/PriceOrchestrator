@@ -159,7 +159,7 @@ namespace PriceOrchestrator.Api.Data.Migrations
                     b.Property<DateTime>("EffectiveFromUtc")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("LastPriceChangeRequestId")
+                    b.Property<Guid?>("LastPriceChangeRequestId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("ProductId")

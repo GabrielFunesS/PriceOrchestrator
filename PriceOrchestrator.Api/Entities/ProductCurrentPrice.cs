@@ -11,7 +11,7 @@
 
         public DateTime EffectiveFromUtc { get; set; }
 
-        public Guid LastPriceChangeRequestId { get; set; }
+        public Guid? LastPriceChangeRequestId { get; set; }
 
 
         // Navigation Properties
