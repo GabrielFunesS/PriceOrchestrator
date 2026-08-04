@@ -1,5 +1,8 @@
 
 using Microsoft.AspNetCore.Http;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 using PriceOrchestrator.Api.Endpoints;
 using PriceOrchestrator.Api.Extensions;
 using PriceOrchestrator.Api.Services;
@@ -21,6 +24,10 @@ namespace PriceOrchestrator.Api
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // FluentValidation integration
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
             // Register hosted worker
             builder.Services.AddHostedService<PriceOrchestrator.Api.Hosted.PriceChangeProcessorWorker>();
