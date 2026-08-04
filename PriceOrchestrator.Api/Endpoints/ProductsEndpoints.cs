@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PriceOrchestrator.Api.DTOs;
 using PriceOrchestrator.Api.Services;
+using PriceOrchestrator.Api.Extensions;
 
 namespace PriceOrchestrator.Api.Endpoints
 {
@@ -24,12 +25,20 @@ namespace PriceOrchestrator.Api.Endpoints
 
             group.MapPost("/", async (ProductService service, CreateProductRequest request) =>
             {
+                var validation = request.ValidateModel();
+                if (validation is not null)
+                    return Results.ValidationProblem(validation.Errors);
+
                 var product = await service.CreateAsync(request);
                 return Results.Created($"/api/products/{product.Id}", product);
             });
 
             group.MapPut("/{id:guid}", async (ProductService service, Guid id, UpdateProductRequest request) =>
             {
+                var validation = request.ValidateModel();
+                if (validation is not null)
+                    return Results.ValidationProblem(validation.Errors);
+
                 var updated = await service.UpdateAsync(id, request);
                 return updated ? Results.NoContent() : Results.NotFound();
             });
