@@ -18,10 +18,6 @@ namespace PriceOrchestrator.Api.Endpoints
 
             group.MapPost("/reserve", async (Services.Interfaces.IStockService stockService, ProductStockDto dto) =>
             {
-                var validation = dto.ValidateModel();
-                if (validation is not null)
-                    return Results.ValidationProblem(validation.Errors);
-
                 var reserved = await stockService.ReserveStockAsync(dto.ProductId, dto.Warehouse, dto.Quantity);
                 return reserved ? Results.Ok() : Results.BadRequest();
             });

@@ -12,10 +12,6 @@ namespace PriceOrchestrator.Api.Endpoints
 
             group.MapPost("/", async (Services.Interfaces.IPriceChangeRequestService requestService, CreatePriceChangeDto dto) =>
             {
-                var validation = dto.ValidateModel();
-                if (validation is not null)
-                    return Results.ValidationProblem(validation.Errors);
-
                 var id = await requestService.CreateRequestAsync(dto);
                 return Results.Created($"/api/price-changes/{id}", id);
             });
