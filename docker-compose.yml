@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # Base de Datos PostgreSQL
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: priceorchestrator-db
+    restart: always
+    environment:
+      POSTGRES_DB: priceorchestrator_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: YourSecurePassword123!
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d priceorchestrator_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # API PriceOrchestrator (.NET 8)
+  priceorchestrator-api:
+    build:
+      context: .
+      dockerfile: PriceOrchestrator.Api/Dockerfile
+    container_name: priceorchestrator-api
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres-db;Port=5432;Database=priceorchestrator_db;Username=postgres;Password=YourSecurePassword123!
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
